@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ar.com.eduardovillalobo.tf.proyecto_recnyc.MainActivity">
+
+    <item
+        android:id="@+id/buscar"
+        android:title="Buscar"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_launcher"
+        />
+</menu>
