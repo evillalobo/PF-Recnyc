@@ -70,7 +70,7 @@ public class NavigationDrawerFragment extends Fragment implements ItemAdapt.Clic
     public static List<RowInfo> getData()
     {
         List<RowInfo> data = new ArrayList<>();
-        int[] icons = {R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
+        int[] icons = {R.drawable.abc_btn_radio_material,
                 R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
                 R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
                 R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
