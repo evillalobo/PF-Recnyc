@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:clickable="true"
     android:orientation="horizontal"
-    android:background="@color/primary">
+    android:background="@drawable/custom_bg"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/listIcon"
@@ -20,7 +20,6 @@
         android:id="@+id/listText"
         android:layout_marginLeft="72dp"
         android:layout_centerVertical="true"
-        android:textStyle="bold"
         android:text="Hola"
         android:textColor="@android:color/white"/>
 

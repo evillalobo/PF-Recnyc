@@ -14,14 +14,14 @@ import java.util.List;
 /**
  * Created by Eduardo on 05/03/2015.
  */
-public class ItemAdapt extends RecyclerView.Adapter<ItemAdapt.MyViewHolder>{
+public class NavItemAdapt extends RecyclerView.Adapter<NavItemAdapt.MyViewHolder>{
 
-    List<RowInfo> data = Collections.emptyList();
+    List<NavRowInfo> data = Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
     private ClickListener clickListener;
 
-    public ItemAdapt(Context context, List<RowInfo> data)
+    public NavItemAdapt(Context context, List<NavRowInfo> data)
     {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -34,14 +34,14 @@ public class ItemAdapt extends RecyclerView.Adapter<ItemAdapt.MyViewHolder>{
     //Se llama cada vez que se quiere agregar un nuevo item
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_row,parent,false);
+        View view = inflater.inflate(R.layout.nav_custom_row,parent,false);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        RowInfo current = data.get(position);
+        NavRowInfo current = data.get(position);
         holder.title.setText(current.title);
         holder.icon.setImageResource(current.iconId);
     }
@@ -65,7 +65,7 @@ public class ItemAdapt extends RecyclerView.Adapter<ItemAdapt.MyViewHolder>{
 
         @Override
         public void onClick(View v) {
-            //context.startActivity(new Intent(context, SubActivity.class));
+            //context.start Activity(new Intent(context, SubActivity.class));
             if (clickListener!=null)
             {
                 clickListener.itemClicked(v, getPosition());

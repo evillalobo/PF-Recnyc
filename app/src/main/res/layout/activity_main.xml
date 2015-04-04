@@ -7,17 +7,23 @@
 
     <include
         android:id="@+id/app_bar"
-        layout="@layout/app_bar"></include>
+        layout="@layout/app_bar"
+    />
+
     <android.support.v4.widget.DrawerLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </FrameLayout>
+        <!-- Contenido del Activity // FrameLayout to Display Fragments-->
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!-- Contenido Navigation Drawer -->
 
         <fragment
             android:id="@+id/fragment_navigation_drawer"
@@ -28,6 +34,7 @@
             android:name="ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFragment"
             tools:layout="@layout/fragment_navigation_drawer">
         </fragment>
+
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

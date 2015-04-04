@@ -18,9 +18,17 @@ android {
         }
     }
 }
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'com.android.support:support-v4:21.0.2'
     compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile 'com.android.support:cardview-v7:21.0.0'
+    compile 'org.lucasr.twowayview:core:1.0.0-SNAPSHOT@aar'  // For Core TwowayView Functionality
+    compile 'org.lucasr.twowayview:layouts:1.0.0-SNAPSHOT@aar' // For Additional Layouts
+    compile 'com.squareup.picasso:picasso:2.4.0' //Load Image Faster
 }

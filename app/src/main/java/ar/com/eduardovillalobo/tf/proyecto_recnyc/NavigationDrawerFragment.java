@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Eduardo on 05/03/2015.
  */
-public class NavigationDrawerFragment extends Fragment implements ItemAdapt.ClickListener{
+public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.ClickListener{
 
     private RecyclerView recyclerView;
 
@@ -29,7 +29,7 @@ public class NavigationDrawerFragment extends Fragment implements ItemAdapt.Clic
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private ItemAdapt adapter;
+    private NavItemAdapt adapter;
 
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
@@ -57,7 +57,7 @@ public class NavigationDrawerFragment extends Fragment implements ItemAdapt.Clic
         View layout=inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
 
-        adapter = new ItemAdapt(getActivity(),getData());
+        adapter = new NavItemAdapt(getActivity(),getData());
 
         adapter.setClickListener(this);
 
@@ -67,28 +67,18 @@ public class NavigationDrawerFragment extends Fragment implements ItemAdapt.Clic
         return layout;
     }
 
-    public static List<RowInfo> getData()
+    public static List<NavRowInfo> getData()
     {
-        List<RowInfo> data = new ArrayList<>();
-        int[] icons = {R.drawable.abc_btn_radio_material,
+        List<NavRowInfo> data = new ArrayList<>();
+        int[] icons = {R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
                 R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha};
-        String [] titles = {"Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5",
-                "Item 6",
-                "Item 7",
-                "Item 8"};
-        for (int i=0;i<8;i++)
+                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,};
+        String [] titles = {"Inicio",
+                "Departamentos Oeste Catamarca",
+                "Sobre Recnyc"};
+        for (int i=0;i<3;i++)
         {
-            RowInfo current = new RowInfo();
+            NavRowInfo current = new NavRowInfo();
             current.iconId = icons[i % icons.length];
             current.title = titles [i % icons.length];
             data.add(current);
@@ -166,7 +156,8 @@ public class NavigationDrawerFragment extends Fragment implements ItemAdapt.Clic
 
     @Override
     public void itemClicked(View view, int position) {
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        //startActivity(new Intent(getActivity(), Mapas.class));
+        //getActivity().getSupportFragmentManager().beginTransaction().add(view.getId(R.id.mapas), "mapas");
 
     }
 }

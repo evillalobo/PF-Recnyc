@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFragment">
+    tools:context="ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFragment"
+    android:background="@color/primary">
 
     <LinearLayout
         android:id="@+id/containerDrawerImage"
@@ -15,9 +16,10 @@
             android:layout_width="280dp"
             android:layout_height="140dp"
             android:layout_marginBottom="16dp"
-            
-            />
-        </LinearLayout>
+        />
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
