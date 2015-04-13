@@ -1,4 +1,4 @@
-package ar.com.eduardovillalobo.tf.proyecto_recnyc;
+package ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
+
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
 
 /**
  * Created by Eduardo on 05/03/2015.

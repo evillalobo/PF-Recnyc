@@ -55,10 +55,10 @@ public class HomeFragment extends Fragment {
                 "Recursos Culturales",
                 "Mapas",
                 "¿Dónde estoy?"};
-        int [] imagenes = {R.drawable.ra4,
-                R.drawable.ra3,
-                R.drawable.ra2,
-                R.drawable.ra1};
+        int [] imagenes = {R.drawable.rn1,
+                R.drawable.rc1,
+                R.drawable.map1,
+                R.drawable.dond1};
         for (int i=0;i<titulos.length;i++) {
             MainOptionInfo item = new MainOptionInfo();
             item.setId(i);

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
+
 /**
  * Created by Eduardo on 01/04/2015.
  */

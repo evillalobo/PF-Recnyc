@@ -1,7 +1,6 @@
-package ar.com.eduardovillalobo.tf.proyecto_recnyc;
+package ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,10 +16,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
+
 /**
  * Created by Eduardo on 05/03/2015.
  */
-public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.ClickListener{
+public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.ClickListener {
 
     private RecyclerView recyclerView;
 
@@ -56,6 +57,8 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
         // Inflate the layout for this fragment
         View layout=inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        recyclerView.addItemDecoration( new DividerItemDecoration(getResources().getDrawable(R.drawable.abc_list_divider_mtrl_alpha)));
+        recyclerView.setHasFixedSize(true);
 
         adapter = new NavItemAdapt(getActivity(),getData());
 
