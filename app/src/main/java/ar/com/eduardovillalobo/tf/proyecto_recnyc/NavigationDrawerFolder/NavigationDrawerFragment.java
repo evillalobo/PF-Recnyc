@@ -73,9 +73,9 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
     public static List<NavRowInfo> getData()
     {
         List<NavRowInfo> data = new ArrayList<>();
-        int[] icons = {R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,
-                R.drawable.abc_ic_menu_paste_mtrl_am_alpha,};
+        int[] icons = {R.drawable.abc_list_selector_disabled_holo_light,
+                R.drawable.abc_list_selector_disabled_holo_light,
+                R.drawable.abc_list_selector_disabled_holo_light,};
         String [] titles = {"Inicio",
                 "Departamentos Oeste Catamarca",
                 "Sobre Recnyc"};
