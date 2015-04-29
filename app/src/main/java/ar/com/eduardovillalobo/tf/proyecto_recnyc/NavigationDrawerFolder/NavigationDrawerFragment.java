@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.HomeFragment;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos.DepartamentosFragment;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
 
 /**
@@ -57,9 +60,9 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
         // Inflate the layout for this fragment
         View layout=inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        recyclerView.addItemDecoration( new DividerItemDecoration(getResources().getDrawable(R.drawable.abc_list_divider_mtrl_alpha)));
+        //allows for optimizations if all home_item views are of the same size
         recyclerView.setHasFixedSize(true);
-
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         adapter = new NavItemAdapt(getActivity(),getData());
 
         adapter.setClickListener(this);
@@ -67,15 +70,16 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         return layout;
     }
 
     public static List<NavRowInfo> getData()
     {
         List<NavRowInfo> data = new ArrayList<>();
-        int[] icons = {R.drawable.abc_list_selector_disabled_holo_light,
-                R.drawable.abc_list_selector_disabled_holo_light,
-                R.drawable.abc_list_selector_disabled_holo_light,};
+        int[] icons = {R.drawable.ic_home_white_36dp,
+                R.drawable.ic_view_list_white_36dp,
+                R.drawable.ic_info_white_36dp,};
         String [] titles = {"Inicio",
                 "Departamentos Oeste Catamarca",
                 "Sobre Recnyc"};
@@ -161,6 +165,25 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
     public void itemClicked(View view, int position) {
         //startActivity(new Intent(getActivity(), Mapas.class));
         //getActivity().getSupportFragmentManager().beginTransaction().add(view.getId(R.id.mapas), "mapas");
+        /*Toast.makeText(this.getActivity(), "home_item selected "+position, Toast.LENGTH_SHORT).show();*/
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment_opcion = null;
+        //Switch con las opciones y las posiciones para cambiar el contenido del fragment
+        switch (position) {
+            case 0:
+                fragment_opcion = new HomeFragment();
+                break;
+            case 1:
+                fragment_opcion = new DepartamentosFragment();
+                break;
+            case 2:
+                break;
+        }
+
+        if(position != 2)
+        fragmentManager.beginTransaction()
+                .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .replace(R.id.frame_container, fragment_opcion).commit();
 
     }
 }

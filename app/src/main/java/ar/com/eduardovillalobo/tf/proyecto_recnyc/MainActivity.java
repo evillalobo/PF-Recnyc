@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos.DepartamentosFragment;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder.NavigationDrawerFragment;
 
 
@@ -47,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new ProvinciasFragment();
+                fragment = new DepartamentosFragment();
                 break;
             case 2:
                 break;
@@ -61,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
                     .replace(R.id.frame_container, fragment).commit();
 
 
-            // update selected item and title, then close the drawer
+            // update selected home_item and title, then close the drawer
 /*            mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);
             setTitle(navMenuTitles[position]);
@@ -82,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar home_item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
@@ -94,5 +95,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

@@ -58,7 +58,7 @@ public class MainOptionLayoutAdapter extends RecyclerView.Adapter<MainOptionLayo
 
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.item, parent, false);
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.home_item, parent, false);
         return new SimpleViewHolder(view);
     }
 
@@ -96,5 +96,7 @@ public class MainOptionLayoutAdapter extends RecyclerView.Adapter<MainOptionLayo
     public int getItemCount() {
         return productList.size();
     }
+
+
 
 }

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:id="@+id/image_selected_depto"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/deptos4"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/text_selected_depto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ANDALGALÁ"
+            style="@style/CardTitle"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:id="@+id/descr_selected_depto"
+            android:text="Sometidos los aborígenes, en 1.658 el Gral. Don Francisco de Nieva y Castilla, fundó el fuerte de San Pedro de Mercado del Valle de los Andalgalas, donde hoy se encuentra la ciudad cabecera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/title2_selected_depto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aspectos Generales"
+            android:textSize="24sp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:background="@color/primary_light"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:id="@+id/aspec_selected_depto"
+            android:text="Altitud sobre el nivel del mar: 973 m.s.n.m
+            Coordenadas:27°36′0″S 66°19′0″O
+            Superficie:4.497 Km2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <View
+            android:layout_width="320dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15sp"
+            >
+            <Button
+
+                android:id="@+id/bt_mapa_selected_depto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Mapa"
+                android:background="#8BC34A"
+                android:textColor="@android:color/white"
+                android:layout_row="3"
+                android:layout_margin="5dp"/>
+            <Button
+                android:id="@+id/bt_rn_selected_depto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#4CAF50"
+                android:textColor="@android:color/white"
+                android:text="Recursos Naturales"
+                android:layout_margin="5dp"/>
+            <Button
+                android:id="@+id/bt_rc_selected_depto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#795548"
+                android:textColor="@android:color/white"
+                android:text="Recursos Culturales"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

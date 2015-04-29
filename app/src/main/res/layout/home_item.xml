@@ -6,16 +6,17 @@
     style="@style/MainCardView"
     card_view:cardCornerRadius="2dp"
     android:elevation="4dp"
+    android:clickable="true"
     >
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/feature_src"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
