@@ -4,20 +4,24 @@ package ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder;
  * Created by Eduardo on 27/04/2015.
  */
 public class DeptoInfo {
-    int id;
-    String name;
+    private int id;
+    private String name;
+    private int imageID;
+
     /*Constructores*/
     public DeptoInfo(){
 
     }
 
-    public DeptoInfo(int id, String name) {
+    public DeptoInfo(int id, String name, int imageID) {
         this.id = id;
         this.name = name;
+        this.imageID = imageID;
     }
 
-    public DeptoInfo(String name){
+    public DeptoInfo(String name, int imageID){
         this.name = name;
+        this.imageID = imageID;
     }
 
     /*Getters y Setters*/
@@ -35,5 +39,13 @@ public class DeptoInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(int imageID) {
+        this.imageID = imageID;
     }
 }

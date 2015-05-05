@@ -41,7 +41,13 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        System.out.println(getDeptos());
 
+        return layout;
+    }
+
+    public List<DeptoInfo> getDeptos(){
+        List<String> allDeptos = new ArrayList<>();
         /**
          * Leer los deptos desde la base de Datos
          */
@@ -49,20 +55,19 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
         /**
          * CRUD
          */
-        Log.d("Ingres datos de: ", "Insertando...");
-        db.addDepto(new DeptoInfo("Andalgalá"));
-
         Log.d("Leyendo los datos de la Base> ", "Leyendo deptos...");
         List<DeptoInfo> deptoInfo = db.getAllDeptos();
 
+        System.out.println(deptoInfo);
+
         for (DeptoInfo di : deptoInfo){
+            allDeptos.add(di.getName());
             String log = "Id: "+di.getId()+" ,Name: " + di.getName();
             Log.d("Nombre: ", log);
         }
 
-        return layout;
+        return deptoInfo;
     }
-
     @Override
     public void itemClicked(View view, int position) {
         FragmentManager fragmentManager = getFragmentManager();
@@ -82,16 +87,17 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
         Toast.makeText(getActivity(), "Item "+ position + " seleccionado",Toast.LENGTH_SHORT).show();
     }
 
-    public static List<DepartamentosRowInfo> getData()
+    public List<DeptoInfo> getData()
     {
-        List<DepartamentosRowInfo> data = new ArrayList<>();
-        int[] image = {
+        List<DeptoInfo> data = getDeptos();
+        /*int[] image = {
                 R.drawable.deptos4,
                 R.drawable.deptos3,
                 R.drawable.deptos5,
                 R.drawable.deptos2,
                 R.drawable.deptos1
         };
+
         String [] titles = {
                 "Andalgalá",
                 "Belén",
@@ -99,20 +105,16 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
                 "Pomán",
                 "Tinogasta"
         };
+
         for (int i=0;i<5;i++)
         {
-            DepartamentosRowInfo current = new DepartamentosRowInfo();
-            current.imageId = image[i % image.length];
-            current.title = titles[i % titles.length];
+            DeptoInfo current = new DeptoInfo();
+            current.setImageID(image[i % image.length ]);
+            current.setName(data.get(i % data.size()).getName());
             data.add(current);
-        }
+        }*/
 
         return data;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 }

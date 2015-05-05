@@ -179,10 +179,11 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
             case 2:
                 break;
         }
+        mDrawerLayout.closeDrawer(containerView);
 
         if(position != 2)
         fragmentManager.beginTransaction()
-                .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.frame_container, fragment_opcion).commit();
 
     }

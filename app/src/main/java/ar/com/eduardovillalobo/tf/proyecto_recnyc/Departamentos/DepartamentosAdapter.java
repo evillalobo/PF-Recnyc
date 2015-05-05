@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.DeptoInfo;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
 
 
@@ -19,12 +20,12 @@ import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
  * Created by Eduardo on 20/04/2015.
  */
 public class DepartamentosAdapter extends RecyclerView.Adapter<DepartamentosAdapter.MyViewHolder> {
-    List<DepartamentosRowInfo> data = Collections.emptyList();
+    List<DeptoInfo> data = Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
     private ClickListener clickListener;
 
-    public DepartamentosAdapter(Context context, List<DepartamentosRowInfo> data)
+    public DepartamentosAdapter(Context context, List<DeptoInfo> data)
     {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -45,9 +46,9 @@ public class DepartamentosAdapter extends RecyclerView.Adapter<DepartamentosAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        DepartamentosRowInfo current = data.get(position);
-        holder.title.setText(current.title);
-        holder.image.setImageResource(current.imageId);
+        DeptoInfo current = data.get(position);
+        holder.name.setText(current.getName());
+        holder.image.setImageResource(current.getImageID());
     }
 
     @Override
@@ -60,13 +61,13 @@ public class DepartamentosAdapter extends RecyclerView.Adapter<DepartamentosAdap
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView title;
+        TextView name;
         ImageView image;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            title = (TextView) itemView.findViewById(R.id.titulo_depto);
+            name = (TextView) itemView.findViewById(R.id.titulo_depto);
             image = (ImageView) itemView.findViewById(R.id.image_depto);
         }
 
