@@ -30,14 +30,19 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View layout = inflater.inflate(R.layout.fragment_departamentos, container, false);
+
         if (getActivity() == null)
             System.out.print("el contexto es null");
+
         recyclerView = (RecyclerView) layout.findViewById(R.id.deptoList);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
+
         adapter = new DepartamentosAdapter(getActivity(), getData());
         adapter.setClickListener(this);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -47,14 +52,12 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
     }
 
     public List<DeptoInfo> getDeptos(){
+
         List<String> allDeptos = new ArrayList<>();
         /**
          * Leer los deptos desde la base de Datos
          */
         DataBaseHandler db = new DataBaseHandler(this.getActivity());
-        /**
-         * CRUD
-         */
         Log.d("Leyendo los datos de la Base> ", "Leyendo deptos...");
         List<DeptoInfo> deptoInfo = db.getAllDeptos();
 
@@ -70,8 +73,10 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
     }
     @Override
     public void itemClicked(View view, int position) {
+
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment_opcion = null;
+
         switch (position) {
             case 0:
                 fragment_opcion = new SelectedDepartamento();
@@ -84,35 +89,13 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
                     .replace(R.id.frame_container, fragment_opcion).addToBackStack(null).commit();
 
         }
+
         Toast.makeText(getActivity(), "Item "+ position + " seleccionado",Toast.LENGTH_SHORT).show();
     }
 
     public List<DeptoInfo> getData()
     {
         List<DeptoInfo> data = getDeptos();
-        /*int[] image = {
-                R.drawable.deptos4,
-                R.drawable.deptos3,
-                R.drawable.deptos5,
-                R.drawable.deptos2,
-                R.drawable.deptos1
-        };
-
-        String [] titles = {
-                "Andalgalá",
-                "Belén",
-                "Santa María",
-                "Pomán",
-                "Tinogasta"
-        };
-
-        for (int i=0;i<5;i++)
-        {
-            DeptoInfo current = new DeptoInfo();
-            current.setImageID(image[i % image.length ]);
-            current.setName(data.get(i % data.size()).getName());
-            data.add(current);
-        }*/
 
         return data;
     }

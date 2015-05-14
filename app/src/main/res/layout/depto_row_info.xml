@@ -6,7 +6,10 @@
     android:clickable="true"
     android:padding="6dp"
     android:background="@android:color/white">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/titulo_depto"
         android:layout_width="wrap_content"
@@ -18,6 +21,18 @@
         android:gravity="center_vertical"
         android:text="Depto 1"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="96dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="bottom"
+        android:text="Pequeño texto con una descripcion cortada del departamento."
+        android:ellipsize="end"
+        android:singleLine="true"
+        />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/image_depto"
         android:layout_width="80dp"
@@ -26,8 +41,5 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/deptos1"
         />
-
-
-
 
 </RelativeLayout>

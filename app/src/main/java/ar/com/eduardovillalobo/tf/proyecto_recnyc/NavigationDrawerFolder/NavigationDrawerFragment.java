@@ -20,6 +20,7 @@ import java.util.List;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.HomeFragment;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos.DepartamentosFragment;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.SobreRecnyc;
 
 /**
  * Created by Eduardo on 05/03/2015.
@@ -62,7 +63,6 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         //allows for optimizations if all home_item views are of the same size
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         adapter = new NavItemAdapt(getActivity(),getData());
 
         adapter.setClickListener(this);
@@ -77,9 +77,9 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
     public static List<NavRowInfo> getData()
     {
         List<NavRowInfo> data = new ArrayList<>();
-        int[] icons = {R.drawable.ic_home_white_36dp,
-                R.drawable.ic_view_list_white_36dp,
-                R.drawable.ic_info_white_36dp,};
+        int[] icons = {R.drawable.ic_home,
+                R.drawable.ic_view_list,
+                R.drawable.ic_info,};
         String [] titles = {"Inicio",
                 "Departamentos Oeste Catamarca",
                 "Sobre Recnyc"};
@@ -172,16 +172,20 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
         switch (position) {
             case 0:
                 fragment_opcion = new HomeFragment();
+                mDrawerLayout.closeDrawer(containerView);
                 break;
             case 1:
                 fragment_opcion = new DepartamentosFragment();
+                mDrawerLayout.closeDrawer(containerView);
                 break;
             case 2:
+                fragment_opcion = new SobreRecnyc();
+                mDrawerLayout.closeDrawer(containerView);
                 break;
         }
-        mDrawerLayout.closeDrawer(containerView);
 
-        if(position != 2)
+
+        if(fragment_opcion!=null)
         fragmentManager.beginTransaction()
                 .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.frame_container, fragment_opcion).commit();

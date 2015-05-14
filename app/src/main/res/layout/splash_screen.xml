@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/splashscreen"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:src="@drawable/splash"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="24dp"
+        android:text="Proyecto Recnyc"
+        android:textStyle="italic"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/splashscreen"
+        android:textColor="@android:color/black"
+        android:id="@+id/textView2" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:layout_above="@+id/splashscreen"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

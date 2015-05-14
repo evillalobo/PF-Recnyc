@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <TextView
             android:paddingBottom="16dp"
             android:paddingTop="16dp"
@@ -52,7 +51,7 @@
             android:paddingRight="16dp"
             android:paddingTop="24dp"
             android:paddingBottom="24dp"
-            android:background="@color/primary_light"
+            android:background="@color/primary"
             android:textColor="@android:color/white"
             />
 
@@ -74,14 +73,14 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15sp"
-            >
+            android:background="@color/primary_light"
+            android:padding="15dp">
+            <TableRow
+                android:gravity="center_horizontal">
             <Button
-
                 android:id="@+id/bt_mapa_selected_depto"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +88,8 @@
                 android:background="#8BC34A"
                 android:textColor="@android:color/white"
                 android:layout_row="3"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:drawableTop="@drawable/ic_map"/>
             <Button
                 android:id="@+id/bt_rn_selected_depto"
                 android:layout_width="fill_parent"
@@ -97,7 +97,10 @@
                 android:background="#4CAF50"
                 android:textColor="@android:color/white"
                 android:text="Recursos Naturales"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:drawableTop="@drawable/ic_floral"/>
+            </TableRow>
+            <TableRow android:gravity="center_horizontal">
             <Button
                 android:id="@+id/bt_rc_selected_depto"
                 android:layout_width="fill_parent"
@@ -105,8 +108,10 @@
                 android:background="#795548"
                 android:textColor="@android:color/white"
                 android:text="Recursos Culturales"
-                android:layout_margin="5dp"/>
-        </LinearLayout>
+                android:layout_margin="5dp"
+                android:drawableTop="@drawable/ic_grade"/>
+            </TableRow>
+        </TableLayout>
 
     </LinearLayout>
 

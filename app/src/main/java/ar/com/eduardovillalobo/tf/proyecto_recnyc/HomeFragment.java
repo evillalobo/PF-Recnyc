@@ -1,6 +1,7 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +17,8 @@ import org.lucasr.twowayview.widget.TwoWayView;
 
 import java.util.ArrayList;
 
-import ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos.DepartamentosFragment;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.ComoLlego.ComoLlego;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.Mapas.Mapas;
 
 /**
  * Created by Eduardo on 01/04/2015.
@@ -58,22 +60,28 @@ public class HomeFragment extends Fragment {
             public void onItemClick(RecyclerView recyclerView, View view, int position, long l) {
                 FragmentManager fragmentManager = getFragmentManager();
                 Fragment fragment_opcion = null;
+                Intent intent = null;
                 //Change the fragment for the selected one
                 switch (position) {
                     case 0:
-                        fragment_opcion = new Recursos_Naturales();
+                        fragment_opcion = new FragmentRecursosNaturales();
                         break;
                     case 1:
-                        fragment_opcion = new DepartamentosFragment();
+                        fragment_opcion = new FragmentRecursosCulturales();
                         break;
                     case 2:
-
+                        intent = new Intent(getActivity(), Mapas.class);
+                        break;
+                    case 3:
+                        intent = new Intent(getActivity(), ComoLlego.class);
                         break;
                 }
                 if(fragment_opcion != null)
                 fragmentManager.beginTransaction()
                         .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .replace(R.id.frame_container, fragment_opcion).addToBackStack(null).commit();
+                if(intent!=null)
+                    startActivity(intent);
 
                 mToast = Toast.makeText(activity, "Item "+position,Toast.LENGTH_SHORT);
                 mToast.show();
