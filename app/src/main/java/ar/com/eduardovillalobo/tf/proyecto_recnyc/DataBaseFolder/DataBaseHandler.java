@@ -72,7 +72,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         DeptoInfo deptoInfo = new DeptoInfo(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getInt(2));
+                cursor.getString(1), cursor.getString(2));
         return deptoInfo;
     }
 
@@ -87,7 +87,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 DeptoInfo deptoInfo = new DeptoInfo();
                 deptoInfo.setId(Integer.parseInt(cursor.getString(0)));
                 deptoInfo.setName(cursor.getString(1));
-                deptoInfo.setImageID(cursor.getInt(2));
+                deptoInfo.setImageID(cursor.getString(2));
                 deptoInfoList.add(deptoInfo);
             } while (cursor.moveToNext());
         }

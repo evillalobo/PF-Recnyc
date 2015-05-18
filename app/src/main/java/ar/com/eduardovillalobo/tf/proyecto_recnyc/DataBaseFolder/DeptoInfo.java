@@ -6,20 +6,20 @@ package ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder;
 public class DeptoInfo {
     private int id;
     private String name;
-    private int imageID;
+    private String imageID;
 
     /*Constructores*/
     public DeptoInfo(){
 
     }
 
-    public DeptoInfo(int id, String name, int imageID) {
+    public DeptoInfo(int id, String name, String imageID) {
         this.id = id;
         this.name = name;
         this.imageID = imageID;
     }
 
-    public DeptoInfo(String name, int imageID){
+    public DeptoInfo(String name, String imageID){
         this.name = name;
         this.imageID = imageID;
     }
@@ -41,11 +41,11 @@ public class DeptoInfo {
         this.name = name;
     }
 
-    public int getImageID() {
+    public String getImageID() {
         return imageID;
     }
 
-    public void setImageID(int imageID) {
+    public void setImageID(String imageID) {
         this.imageID = imageID;
     }
 }

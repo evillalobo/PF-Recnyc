@@ -77,7 +77,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary_light"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:gravity="center_horizontal">
             <TableRow
                 android:gravity="center_horizontal">
             <Button
@@ -89,7 +90,8 @@
                 android:textColor="@android:color/white"
                 android:layout_row="3"
                 android:layout_margin="5dp"
-                android:drawableTop="@drawable/ic_map"/>
+                android:drawableTop="@drawable/ic_map"
+                android:gravity="center_horizontal" />
             <Button
                 android:id="@+id/bt_rn_selected_depto"
                 android:layout_width="fill_parent"
@@ -98,7 +100,8 @@
                 android:textColor="@android:color/white"
                 android:text="Recursos Naturales"
                 android:layout_margin="5dp"
-                android:drawableTop="@drawable/ic_floral"/>
+                android:drawableTop="@drawable/ic_floral"
+                android:gravity="center_horizontal" />
             </TableRow>
             <TableRow android:gravity="center_horizontal">
             <Button
@@ -109,7 +112,8 @@
                 android:textColor="@android:color/white"
                 android:text="Recursos Culturales"
                 android:layout_margin="5dp"
-                android:drawableTop="@drawable/ic_grade"/>
+                android:drawableTop="@drawable/ic_grade"
+                style=""/>
             </TableRow>
         </TableLayout>
 

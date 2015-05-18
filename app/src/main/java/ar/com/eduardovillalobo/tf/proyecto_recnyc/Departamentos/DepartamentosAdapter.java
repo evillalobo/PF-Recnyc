@@ -1,6 +1,7 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -47,8 +48,13 @@ public class DepartamentosAdapter extends RecyclerView.Adapter<DepartamentosAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         DeptoInfo current = data.get(position);
+        
+        String imageidentifier = current.getImageID();
+        int imageResource = context.getResources().getIdentifier(imageidentifier, null, context.getPackageName());
+
         holder.name.setText(current.getName());
-        holder.image.setImageResource(current.getImageID());
+        /*holder.image.setImageResource(current.getImageID());*/
+        holder.image.setImageResource(imageResource);
     }
 
     @Override

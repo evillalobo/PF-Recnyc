@@ -172,18 +172,16 @@ public class NavigationDrawerFragment extends Fragment implements NavItemAdapt.C
         switch (position) {
             case 0:
                 fragment_opcion = new HomeFragment();
-                mDrawerLayout.closeDrawer(containerView);
                 break;
             case 1:
                 fragment_opcion = new DepartamentosFragment();
-                mDrawerLayout.closeDrawer(containerView);
                 break;
             case 2:
                 fragment_opcion = new SobreRecnyc();
-                mDrawerLayout.closeDrawer(containerView);
                 break;
         }
 
+        mDrawerLayout.closeDrawer(containerView);
 
         if(fragment_opcion!=null)
         fragmentManager.beginTransaction()

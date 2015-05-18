@@ -33,44 +33,44 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
 
         View layout = inflater.inflate(R.layout.fragment_departamentos, container, false);
 
-        if (getActivity() == null)
-            System.out.print("el contexto es null");
-
         recyclerView = (RecyclerView) layout.findViewById(R.id.deptoList);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);//Increase performance
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-
-        adapter = new DepartamentosAdapter(getActivity(), getData());
+        //Read Database
+        DataBaseHandler db = new DataBaseHandler(this.getActivity());
+        List<DeptoInfo> deptoInfo = db.getAllDeptos();
+        //Asign list of Deptos to the adapter
+        adapter = new DepartamentosAdapter(getActivity(), deptoInfo);
         adapter.setClickListener(this);
-
+        //Asign the adapater to the recyclerview
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        System.out.println(getDeptos());
 
         return layout;
     }
 
+    /*
+    En caso de CRUD usar este método
     public List<DeptoInfo> getDeptos(){
 
-        List<String> allDeptos = new ArrayList<>();
-        /**
-         * Leer los deptos desde la base de Datos
-         */
-        DataBaseHandler db = new DataBaseHandler(this.getActivity());
-        Log.d("Leyendo los datos de la Base> ", "Leyendo deptos...");
-        List<DeptoInfo> deptoInfo = db.getAllDeptos();
+    List<String> allDeptos = new ArrayList<>();
+    *//**
+     * Read Deptos in Data Base
+     *//*
+    DataBaseHandler db = new DataBaseHandler(this.getActivity());
+    Log.d("Leyendo los datos de la Base> ", "Leyendo deptos...");
+    List<DeptoInfo> deptoInfo = db.getAllDeptos();
 
-        System.out.println(deptoInfo);
+    System.out.println(deptoInfo);
 
-        for (DeptoInfo di : deptoInfo){
-            allDeptos.add(di.getName());
-            String log = "Id: "+di.getId()+" ,Name: " + di.getName();
-            Log.d("Nombre: ", log);
-        }
-
-        return deptoInfo;
+    for (DeptoInfo di : deptoInfo){
+        allDeptos.add(di.getName());
+        String log = "Id: "+di.getId()+" ,Name: " + di.getName();
+        Log.d("Nombre: ", log);
     }
+    return deptoInfo;
+    }*/
+
     @Override
     public void itemClicked(View view, int position) {
 
@@ -91,13 +91,6 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
         }
 
         Toast.makeText(getActivity(), "Item "+ position + " seleccionado",Toast.LENGTH_SHORT).show();
-    }
-
-    public List<DeptoInfo> getData()
-    {
-        List<DeptoInfo> data = getDeptos();
-
-        return data;
     }
 
 }
