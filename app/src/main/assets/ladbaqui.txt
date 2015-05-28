@@ -1,0 +1,5 @@
+1- Make db without extension
+2-Open console and type:
+        sqlite3 db .dump > db.dmp
+3-Build a zip file with db.dmp file
+4-Store the zip file in project/MyDBapp/assets/

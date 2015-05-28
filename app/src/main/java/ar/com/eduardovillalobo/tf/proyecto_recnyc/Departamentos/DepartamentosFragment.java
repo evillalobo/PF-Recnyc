@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
         //Read Database
         DataBaseHandler db = new DataBaseHandler(this.getActivity());
         List<DeptoInfo> deptoInfo = db.getAllDeptos();
+        db.close();
         //Asign list of Deptos to the adapter
         adapter = new DepartamentosAdapter(getActivity(), deptoInfo);
         adapter.setClickListener(this);
@@ -75,22 +77,15 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
     public void itemClicked(View view, int position) {
 
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment_opcion = null;
+        Fragment fragment_opcion = new SelectedDepartamento();
+        Bundle bundle = new Bundle();
+        bundle.putInt("Opcion", position+1);
+        fragment_opcion.setArguments(bundle);
+        fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .replace(R.id.frame_container, fragment_opcion).addToBackStack(null).commit();
 
-        switch (position) {
-            case 0:
-                fragment_opcion = new SelectedDepartamento();
-                break;
-        }
-
-        if(fragment_opcion != null) {
-            fragmentManager.beginTransaction()
-                    .setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                    .replace(R.id.frame_container, fragment_opcion).addToBackStack(null).commit();
-
-        }
-
-        Toast.makeText(getActivity(), "Item "+ position + " seleccionado",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Item "+ position + " seleccionado",Toast.LENGTH_SHORT).show();
     }
 
 }

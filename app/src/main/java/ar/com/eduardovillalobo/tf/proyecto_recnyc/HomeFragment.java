@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.ComoLlego.ComoLlego;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.Mapas.Mapas;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales.RecursosNaturalesFragment;
 
 /**
  * Created by Eduardo on 01/04/2015.
@@ -64,7 +65,7 @@ public class HomeFragment extends Fragment {
                 //Change the fragment for the selected one
                 switch (position) {
                     case 0:
-                        fragment_opcion = new FragmentRecursosNaturales();
+                        fragment_opcion = new RecursosNaturalesFragment();
                         break;
                     case 1:
                         fragment_opcion = new FragmentRecursosCulturales();

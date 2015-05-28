@@ -1,10 +1,15 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc;
 
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.view.menu.MenuItemImpl;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +21,8 @@ import ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder.Navigat
 
 public class MainActivity extends ActionBarActivity {
 
+    private Menu menu;
+    final Context context = this;
     private Toolbar mToolbar;
     private NavigationDrawerFragment navigationDrawerFragment;
 
@@ -78,6 +85,10 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
@@ -89,7 +100,8 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.buscar) {
+        if (id == R.id.search) {
+            onSearchRequested();
             return true;
         }
 

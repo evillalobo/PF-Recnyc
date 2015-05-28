@@ -7,21 +7,24 @@ public class DeptoInfo {
     private int id;
     private String name;
     private String imageID;
+    private String desc;
 
     /*Constructores*/
     public DeptoInfo(){
 
     }
 
-    public DeptoInfo(int id, String name, String imageID) {
+    public DeptoInfo(int id, String name, String imageID, String desc) {
         this.id = id;
         this.name = name;
         this.imageID = imageID;
+        this.desc = desc;
     }
 
-    public DeptoInfo(String name, String imageID){
+    public DeptoInfo(String name, String imageID, String desc){
         this.name = name;
         this.imageID = imageID;
+        this.desc = desc;
     }
 
     /*Getters y Setters*/
@@ -47,5 +50,13 @@ public class DeptoInfo {
 
     public void setImageID(String imageID) {
         this.imageID = imageID;
+    }
+
+    public String getDesc(){
+        return desc;
+    }
+
+    public void setDesc(String desc){
+        this.desc = desc;
     }
 }

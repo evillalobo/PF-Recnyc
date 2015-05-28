@@ -19,8 +19,14 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "proyectofinal";
     private static final String TABLE_DEPTOS = "Departamento";
+    private static final String TABLE_RECURSOS_NATURALES = "RecursoNatural";
     private static final String KEY_ID = "i";
     private static final String KEY_NAME = "name";
+    private static final String KEY_IMAGE = "imageID";
+    private static final String KEY_DESC = "desc";
+
+    private static final String[] COLUMNS = {KEY_ID,KEY_NAME,KEY_IMAGE, KEY_DESC};
+
     Context mContext=null;
 
     public DataBaseHandler(Context context) {
@@ -39,7 +45,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             // if you like to download file from remote site comment above line and uncomment below line.
             //SQLiteDBDeploy.deploy(sqlLiteDb,"http://ingenious-camel.googlecode.com/svn/trunk/SQLiteDBDeployer/assets/northwind.zip");
         } catch (IOException e) {
-            Log.e("Poryectofinal", e.getMessage(), e);
+            Log.e("Proyectofinal", e.getMessage(), e);
             throw new Error(e.getMessage());
         }
     }
@@ -47,7 +53,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXIST " + TABLE_DEPTOS);
-
+        db.execSQL("DROP TABLE IF EXIST " + TABLE_RECURSOS_NATURALES);
         onCreate(db);
     }
 
@@ -66,14 +72,53 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     public DeptoInfo getDepto(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_DEPTOS, new String[]{KEY_ID, KEY_NAME}, KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+        Cursor cursor = db.query(TABLE_DEPTOS,
+                COLUMNS,
+                " i = ?",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null,
+                null
+        );
+        //Cursor cursor = db.rawQuery("SELECT * FROM Departamento WHERE i");
 
-        DeptoInfo deptoInfo = new DeptoInfo(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
-        return deptoInfo;
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        DeptoInfo depto = new DeptoInfo(
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3)
+        );
+
+        return depto;
+    }
+    public RecursoNaturalInfo getRecursoNatural(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_DEPTOS,
+                COLUMNS,
+                " i = ?",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null,
+                null
+        );
+        //Cursor cursor = db.rawQuery("SELECT * FROM Departamento WHERE i");
+
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        RecursoNaturalInfo recursoNaturalInfo = new RecursoNaturalInfo(
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3)
+        );
+
+        return recursoNaturalInfo;
     }
 
     public List<DeptoInfo> getAllDeptos() {
@@ -88,10 +133,30 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 deptoInfo.setId(Integer.parseInt(cursor.getString(0)));
                 deptoInfo.setName(cursor.getString(1));
                 deptoInfo.setImageID(cursor.getString(2));
+                deptoInfo.setDesc(cursor.getString(3));
                 deptoInfoList.add(deptoInfo);
             } while (cursor.moveToNext());
         }
-        System.out.println("En la base" + deptoInfoList.size());
+        Log.d("Departamentos","En la base hay " + deptoInfoList.size()+" Departamentos para mostrar");
         return deptoInfoList;
+    }
+    public List<RecursoNaturalInfo> getAllRecNat(){
+        List<RecursoNaturalInfo> recursoNaturalInfoList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_RECURSOS_NATURALES;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                RecursoNaturalInfo recursoNaturalInfo = new RecursoNaturalInfo();
+                recursoNaturalInfo.setId(Integer.parseInt(cursor.getString(0)));
+                recursoNaturalInfo.setNombre(cursor.getString(1));
+                recursoNaturalInfo.setImageID(cursor.getString(2));
+                recursoNaturalInfo.setDescripcion(cursor.getString(3));
+                recursoNaturalInfoList.add(recursoNaturalInfo);
+            } while (cursor.moveToNext());
+        }
+        Log.d("Recursos Naturales","En la base hay " + recursoNaturalInfoList.size()+" Recursos Naturales para mostrar");
+        return recursoNaturalInfoList;
     }
 }

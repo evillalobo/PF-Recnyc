@@ -1,14 +1,14 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,13 +48,11 @@ public class DepartamentosAdapter extends RecyclerView.Adapter<DepartamentosAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         DeptoInfo current = data.get(position);
-        
-        String imageidentifier = current.getImageID();
-        int imageResource = context.getResources().getIdentifier(imageidentifier, null, context.getPackageName());
-
         holder.name.setText(current.getName());
-        /*holder.image.setImageResource(current.getImageID());*/
-        holder.image.setImageResource(imageResource);
+        int imageResource = context.getResources().getIdentifier(current.getImageID(),
+                null,context.getPackageName());
+        Picasso.with(context).load(imageResource).into(holder.image);
+        holder.desc.setText(current.getDesc());
     }
 
     @Override
@@ -69,12 +67,14 @@ public class DepartamentosAdapter extends RecyclerView.Adapter<DepartamentosAdap
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
         ImageView image;
+        TextView desc;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             name = (TextView) itemView.findViewById(R.id.titulo_depto);
             image = (ImageView) itemView.findViewById(R.id.image_depto);
+            desc = (TextView) itemView.findViewById(R.id.desc_depto);
         }
 
         @Override
