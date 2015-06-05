@@ -19,7 +19,8 @@ import java.util.ArrayList;
 
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.ComoLlego.ComoLlego;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.Mapas.Mapas;
-import ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales.RecursosNaturalesFragment;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosCulturales.CategoriasCulturalesFragment;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales.CategoriasNaturalesFragment;
 
 /**
  * Created by Eduardo on 01/04/2015.
@@ -65,10 +66,10 @@ public class HomeFragment extends Fragment {
                 //Change the fragment for the selected one
                 switch (position) {
                     case 0:
-                        fragment_opcion = new RecursosNaturalesFragment();
+                        fragment_opcion = new CategoriasNaturalesFragment();
                         break;
                     case 1:
-                        fragment_opcion = new FragmentRecursosCulturales();
+                        fragment_opcion = new CategoriasCulturalesFragment();
                         break;
                     case 2:
                         intent = new Intent(getActivity(), Mapas.class);
