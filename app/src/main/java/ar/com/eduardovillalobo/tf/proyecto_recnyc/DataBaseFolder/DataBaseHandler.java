@@ -145,10 +145,40 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     }
     //Listar todas las categorias de Recursos Naturales
     public List<CategoriasInfo> getCategoriasNatural(){
-        SQLiteDatabase db = this.getReadableDatabase();
         List <CategoriasInfo> categoriasNaturales = new ArrayList<>();
         //Select * FROM Categoria, RecursoNatural WHERE Categoria.id=Cat_Nat.cat_id AND RecursoNatural.id=Cat_Nat.nat_id;
+        String selectQuery = "SELECT * FROM Categoria, RecursoNatural, Cat_Nat WHERE Categoria.id=Cat_Nat.cat_id AND RecursoNatural.id = Cat_Nat.nat_id;";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst())
+        {
+            do{
+                CategoriasInfo categoriasInfo = new CategoriasInfo();
+                categoriasInfo.setId(Integer.parseInt(cursor.getString(0)));
+                categoriasInfo.setCategoria(cursor.getString(1));
+                categoriasNaturales.add(categoriasInfo);
+            }while (cursor.moveToNext());
+        }
         return categoriasNaturales;
+    }
+    //Listar todas las categorias de Recursos Culturales
+    public List<CategoriasInfo> getCategoriasCultural(){
+        List <CategoriasInfo> categoriasCulturales = new ArrayList<>();
+        String selectQuery = "SELECT * FROM Categoria, RecursoCultural, Cat_Cult WHERE Categoria.id = Cat_Cult.cat_id AND RecursoCultural.id = Cat_Cult.cult_id GROUP BY Categoria.categoria;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        System.out.println(cursor);
+        if(cursor.moveToFirst())
+        {
+            do{
+                CategoriasInfo categoriasInfo = new CategoriasInfo();
+                categoriasInfo.setId(Integer.parseInt(cursor.getString(0)));
+                categoriasInfo.setCategoria(cursor.getString(1));
+                categoriasCulturales.add(categoriasInfo);
+            }while (cursor.moveToNext());
+        }
+        return categoriasCulturales;
     }
     /*Métodos de Recursos Naturales*/
     //Devuelve un Recurso Natural pasando su id

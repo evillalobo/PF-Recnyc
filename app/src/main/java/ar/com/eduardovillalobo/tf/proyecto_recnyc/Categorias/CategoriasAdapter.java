@@ -1,4 +1,4 @@
-package ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosCulturales;
+package ar.com.eduardovillalobo.tf.proyecto_recnyc.Categorias;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +39,7 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CategoriasInfo current = data.get(position);
-        holder.categoria.setText(current.getCategoria());
+        holder.categoria.setText(current.getCategoria()+" "+current.getId());
 
     }
 

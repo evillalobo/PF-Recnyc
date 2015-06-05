@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.Categorias.CategoriasAdapter;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.CategoriasInfo;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.DataBaseHandler;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder.DividerItemDecoration;
@@ -31,7 +32,7 @@ public class CategoriasCulturalesFragment extends Fragment implements Categorias
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
 
         DataBaseHandler db = new DataBaseHandler(this.getActivity());
-        List<CategoriasInfo> categoriasInfoList = db.getAllCategorias();
+        List<CategoriasInfo> categoriasInfoList = db.getCategoriasCultural();
         db.close();
 
         adapter = new CategoriasAdapter(getActivity(), categoriasInfoList);
