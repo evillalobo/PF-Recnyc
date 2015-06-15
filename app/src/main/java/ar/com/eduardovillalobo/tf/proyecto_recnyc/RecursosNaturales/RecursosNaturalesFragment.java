@@ -24,6 +24,12 @@ public class RecursosNaturalesFragment extends Fragment implements RecursosNatur
 
     private RecyclerView recyclerView;
     private RecursosNaturalesAdapter adapter;
+    private int tipo_categoria;
+    List<RecursoNaturalInfo> recursoNaturalInfo;
+
+    public RecursosNaturalesFragment(int id){
+        tipo_categoria = id;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +38,7 @@ public class RecursosNaturalesFragment extends Fragment implements RecursosNatur
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         DataBaseHandler db = new DataBaseHandler(this.getActivity());
-        List<RecursoNaturalInfo> recursoNaturalInfo = db.getAllRecNat();
+        recursoNaturalInfo = db.getRecursosNaturalesID(tipo_categoria);
         db.close();
         adapter = new RecursosNaturalesAdapter(getActivity(), recursoNaturalInfo);
         adapter.setClickListener(this);
@@ -44,11 +50,10 @@ public class RecursosNaturalesFragment extends Fragment implements RecursosNatur
 
     @Override
     public void itemClicked(View view, int position) {
+        RecursoNaturalInfo recursoID = recursoNaturalInfo.get(position);
+        int id = recursoID.getId();
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment_opcion = new RecursoNaturalDetalle();
-        Bundle bundle = new Bundle();
-        bundle.putInt("Opcion", position+1);
-        fragment_opcion.setArguments(bundle);
+        Fragment fragment_opcion = new RecursoNaturalDetalle(id);
         fragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                 .replace(R.id.frame_container, fragment_opcion).addToBackStack(null).commit();

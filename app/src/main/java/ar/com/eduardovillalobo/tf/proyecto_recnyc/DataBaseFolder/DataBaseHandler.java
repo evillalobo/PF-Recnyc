@@ -147,7 +147,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public List<CategoriasInfo> getCategoriasNatural(){
         List <CategoriasInfo> categoriasNaturales = new ArrayList<>();
         //Select * FROM Categoria, RecursoNatural WHERE Categoria.id=Cat_Nat.cat_id AND RecursoNatural.id=Cat_Nat.nat_id;
-        String selectQuery = "SELECT * FROM Categoria, RecursoNatural, Cat_Nat WHERE Categoria.id=Cat_Nat.cat_id AND RecursoNatural.id = Cat_Nat.nat_id;";
+        String selectQuery = "SELECT Categoria.[id], Categoria.[categoria] FROM Categoria, RecursoNatural, Cat_Nat WHERE Categoria.id=Cat_Nat.cat_id AND RecursoNatural.id = Cat_Nat.nat_id GROUP BY Categoria.categoria;";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(selectQuery,null);
@@ -165,7 +165,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     //Listar todas las categorias de Recursos Culturales
     public List<CategoriasInfo> getCategoriasCultural(){
         List <CategoriasInfo> categoriasCulturales = new ArrayList<>();
-        String selectQuery = "SELECT * FROM Categoria, RecursoCultural, Cat_Cult WHERE Categoria.id = Cat_Cult.cat_id AND RecursoCultural.id = Cat_Cult.cult_id GROUP BY Categoria.categoria;";
+        String selectQuery = "SELECT Categoria.[id], Categoria.[categoria] FROM Categoria, RecursoCultural, Cat_Cult WHERE Categoria.id = Cat_Cult.cat_id AND RecursoCultural.id = Cat_Cult.cult_id GROUP BY Categoria.categoria;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery,null);
         System.out.println(cursor);
@@ -184,7 +184,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     //Devuelve un Recurso Natural pasando su id
     public RecursoNaturalInfo getRecursoNatural(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_DEPTOS,//Table
+        Cursor cursor = db.query(TABLE_RECURSOS_NATURALES,//Table
                 COLUMNS,//Columns
                 " id = ?",//Where
                 new String[]{String.valueOf(id)},//WhereArgs
@@ -203,8 +203,29 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 cursor.getString(2),
                 cursor.getString(3)
         );
-
+        Log.d("Recurso Cultural, Info tabla--->","0-"+cursor.getString(0)+
+                "**1-"+cursor.getString(1)+
+                "**2-"+cursor.getString(2)+
+                "**3-"+cursor.getString(3));
         return recursoNaturalInfo;
+    }
+    //Lista todos los recursos Naturales según la id de categoria seleccionada
+    public List<RecursoNaturalInfo> getRecursosNaturalesID(int id){
+        List<RecursoNaturalInfo> recursosID = new ArrayList<>();
+        String selectQuery = "SELECT RecursoNatural.[id], RecursoNatural.[nombre], RecursoNatural.[imageID], RecursoNatural.[descripcion] FROM RecursoNatural, Categoria, Cat_Nat WHERE Cat_Nat.[cat_id] = "+id+" AND Cat_Nat.[nat_id] = RecursoNatural.[id] GROUP BY RecursoNatural.[nombre];";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                RecursoNaturalInfo recursoNaturalInfo = new RecursoNaturalInfo();
+                recursoNaturalInfo.setId(Integer.parseInt(cursor.getString(0)));
+                recursoNaturalInfo.setNombre(cursor.getString(1));
+                recursoNaturalInfo.setImageID(cursor.getString(2));
+                recursoNaturalInfo.setDescripcion(cursor.getString(3));
+                recursosID.add(recursoNaturalInfo);
+            } while(cursor.moveToNext());
+        }
+        return recursosID;
     }
     //Lista todos los Recursos Naturales
     public List<RecursoNaturalInfo> getAllRecNat(){
@@ -227,9 +248,26 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         return recursoNaturalInfoList;
     }
 
-    /*Recursos Culturales Methods*/
-    //Devuelve un Recurso Cultural según una categoria
 
+    /*Recursos Culturales Methods*/
+    //Lista todos los recursos Naturales seún la id de categoria seleccionada
+    public List<RecursoCulturalInfo> getRecursosCulturalesID(int id){
+        List<RecursoCulturalInfo> recursosID = new ArrayList<>();
+        String selectQuery = "SELECT RecursoCultural.[id], RecursoCultural.[nombre], RecursoCultural.[imageID], RecursoCultural.[descripcion] FROM RecursoCultural, Categoria, Cat_Cult WHERE Cat_Cult.[cat_id] = "+id+" AND Cat_Cult.[cult_id] = RecursoCultural.[id] GROUP BY RecursoCultural.[nombre]; ";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                RecursoCulturalInfo recursoCulturalInfo = new RecursoCulturalInfo();
+                recursoCulturalInfo.setId(Integer.parseInt(cursor.getString(0)));
+                recursoCulturalInfo.setNombre(cursor.getString(1));
+                recursoCulturalInfo.setImageID(cursor.getString(2));
+                recursoCulturalInfo.setDescripcion(cursor.getString(3));
+                recursosID.add(recursoCulturalInfo);
+            } while(cursor.moveToNext());
+        }
+        return recursosID;
+    }
     //Lista todos los Recursos Culturales
     public List<RecursoCulturalInfo> getAllRecCult(){
         List<RecursoCulturalInfo> recursoCulturalInfoList = new ArrayList<>();
@@ -249,5 +287,33 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         }
         Log.d("Recursos Naturales","En la base hay " + recursoCulturalInfoList.size()+" Recursos Naturales para mostrar");
         return recursoCulturalInfoList;
+    }
+    //Devuelve un Recurso Natural pasando su id
+    public RecursoCulturalInfo getRecursoCultural(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_RECURSOS_CULTURALES,//Table
+                COLUMNS,//Columns
+                " id = ?",//Where
+                new String[]{String.valueOf(id)},//WhereArgs
+                null,//groupby
+                null,//having
+                null,//order
+                null//limits
+        );
+
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        RecursoCulturalInfo recursoCulturalInfo = new RecursoCulturalInfo(
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3)
+        );
+        Log.d("Recurso Cultural, Info tabla--->","0-"+cursor.getString(0)+
+                "**1-"+cursor.getString(1)+
+                "**2-"+cursor.getString(2)+
+                "**3-"+cursor.getString(3));
+        return recursoCulturalInfo;
     }
 }

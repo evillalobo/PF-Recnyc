@@ -1,19 +1,15 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.DataBaseHandler;
@@ -32,9 +28,9 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View layout = inflater.inflate(R.layout.fragment_departamentos, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_departamentos, container, false);
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.deptoList);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.deptoList);
         recyclerView.setHasFixedSize(true);//Increase performance
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         //Read Database
@@ -48,7 +44,7 @@ public class DepartamentosFragment extends Fragment implements DepartamentosAdap
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        return layout;
+        return rootView;
     }
 
     /*

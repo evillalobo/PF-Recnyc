@@ -10,10 +10,10 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:scaleType="centerCrop"
-            android:id="@+id/imageView"
+            android:id="@+id/imageCate"
             android:src="@drawable/shinkal"/>
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textCate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recusos Culturales del Oeste"

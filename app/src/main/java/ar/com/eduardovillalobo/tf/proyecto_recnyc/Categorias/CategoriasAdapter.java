@@ -2,6 +2,7 @@ package ar.com.eduardovillalobo.tf.proyecto_recnyc.Categorias;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,19 +29,22 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.My
         this.data = data;
     }
 
+    public void setClickListener(ClickListener clickListener)
+    {
+        this.clickListener = clickListener;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.cat_row_info, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CategoriasInfo current = data.get(position);
-        holder.categoria.setText(current.getCategoria()+" "+current.getId());
-
+        holder.categoria.setText(current.getCategoria());
     }
 
     @Override
@@ -48,25 +52,28 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.My
         return data.size();
     }
 
-    public interface ClickListener{
+    public interface  ClickListener{
         public void itemClicked(View view, int position);
     }
-    public void setClickListener(ClickListener clickListener){
-        this.clickListener = clickListener;
-    }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView categoria;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             categoria = (TextView) itemView.findViewById(R.id.titulo_categoria);
+
         }
 
         @Override
         public void onClick(View v) {
-            if(clickListener != null)
-                clickListener.itemClicked(v, getPosition());
+            if(clickListener!=null)
+            {
+                clickListener.itemClicked(v,getPosition());
+                Log.d("Categoria Adapter>","Click en elemento");
+            }
         }
     }
 }

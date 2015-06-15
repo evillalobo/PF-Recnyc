@@ -21,18 +21,11 @@ import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
  * Created by Eduardo on 26/05/2015.
  */
 public class RecursoNaturalDetalle extends Fragment implements View.OnClickListener{
-    int opcion;
+    int id;
     RecursoNaturalInfo recursoNaturalInfo;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(getArguments() != null)
-        {
-            opcion = getArguments().getInt("Opcion", 99);
-            Log.d("En Recursos naturales. ", "La opción elegida es > "+ opcion);
-            getRecursoNat(opcion);
-        }
+    public RecursoNaturalDetalle(int id){
+        this.id = id;
     }
 
     @Override
@@ -42,7 +35,9 @@ public class RecursoNaturalDetalle extends Fragment implements View.OnClickListe
         /*Set the data from the DB with the position given in the previous fragment*/
         TextView tv_titulo = (TextView) rootView.findViewById(R.id.title_selected_rec_nat);
         TextView tv_desc = (TextView) rootView.findViewById(R.id.descr_selected_rec_nat);
-        ImageView iv_depto = (ImageView) rootView.findViewById(R.id.image_rec_nat_detalle);
+        ImageView iv_rec = (ImageView) rootView.findViewById(R.id.image_rec_nat_detalle);
+        recursoNaturalInfo = getRecursoNat(id);
+
         //Sets data
         tv_titulo.setText(recursoNaturalInfo.getNombre());
         tv_desc.setText(recursoNaturalInfo.getDescripcion());

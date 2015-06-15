@@ -2,11 +2,16 @@ package ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 
 import java.util.List;
 
@@ -22,17 +27,21 @@ import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
 public class CategoriasNaturalesFragment extends Fragment implements CategoriasAdapter.ClickListener{
     private RecyclerView recyclerView;
     private CategoriasAdapter adapter;
+    private List<CategoriasInfo> categoriasInfoList;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categorias,container,false);
+        TextView type_cate = (TextView) rootView.findViewById(R.id.textCate);
+        type_cate.setText("Recuros Naturales del Oeste");
+
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.categorialist);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
 
         DataBaseHandler db = new DataBaseHandler(this.getActivity());
-        List<CategoriasInfo> categoriasInfoList = db.getCategoriasNatural();
+        categoriasInfoList = db.getCategoriasNatural();
         db.close();
 
         adapter = new CategoriasAdapter(getActivity(), categoriasInfoList);
@@ -46,6 +55,17 @@ public class CategoriasNaturalesFragment extends Fragment implements CategoriasA
 
     @Override
     public void itemClicked(View view, int position) {
-        //TODO
+        //Captura el id del recurso
+        int id;
+        CategoriasInfo categoriasInfo = categoriasInfoList.get(position);
+        id = categoriasInfo.getId();
+        //Envio el id al Fragmento de los Recursos Naturales para mostrar solo los de ese tipo
+        //Toast.makeText(this.getActivity(),"Categoria id>"+id+" seleccionado", Toast.LENGTH_SHORT).show();
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment_opcion = new RecursosNaturalesFragment(id);
+        fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .replace(R.id.frame_container, fragment_opcion).addToBackStack(null)
+                .commit();
     }
 }

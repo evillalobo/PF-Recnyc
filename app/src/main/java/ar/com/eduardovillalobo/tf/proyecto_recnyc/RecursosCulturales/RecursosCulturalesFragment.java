@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.RecursoNaturalI
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder.DividerItemDecoration;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales.RecursoNaturalDetalle;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales.RecursosNaturalesFragment;
 
 /**
  * Created by Eduardo on 08/05/2015.
@@ -26,6 +28,12 @@ public class RecursosCulturalesFragment extends Fragment implements RecursoCultu
 
     private RecyclerView recyclerView;
     private RecursoCulturalesAdapter adapter;
+    private int tipo_categoria;
+    List<RecursoCulturalInfo> recursoCulturalInfo;
+
+    public RecursosCulturalesFragment(int id){
+        tipo_categoria = id;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +45,7 @@ public class RecursosCulturalesFragment extends Fragment implements RecursoCultu
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
 
         DataBaseHandler db = new DataBaseHandler(this.getActivity());
-        List<RecursoCulturalInfo> recursoCulturalInfo = db.getAllRecCult();
+        recursoCulturalInfo = db.getRecursosCulturalesID(tipo_categoria);
         db.close();
 
         adapter = new RecursoCulturalesAdapter(getActivity(), recursoCulturalInfo);
@@ -51,6 +59,13 @@ public class RecursosCulturalesFragment extends Fragment implements RecursoCultu
 
     @Override
     public void itemClicked(View view, int position) {
-        //TODO
+        RecursoCulturalInfo recursoID = recursoCulturalInfo.get(position);
+        int id = recursoID.getId();
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment_opcion = new RecursoCulturalDetalle(id);
+        fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .replace(R.id.frame_container, fragment_opcion).addToBackStack(null).commit();
+
     }
 }

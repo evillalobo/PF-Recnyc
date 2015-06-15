@@ -13,14 +13,14 @@ public class RecursoCulturalInfo {
     public RecursoCulturalInfo() {
     }
 
-    public RecursoCulturalInfo(int id, String nombre, String descripcion, String imageID) {
+    public RecursoCulturalInfo(int id, String nombre, String imageID, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imageID = imageID;
     }
 
-    public RecursoCulturalInfo(String nombre, String descripcion, String imageID) {
+    public RecursoCulturalInfo(String nombre, String imageID, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imageID = imageID;
