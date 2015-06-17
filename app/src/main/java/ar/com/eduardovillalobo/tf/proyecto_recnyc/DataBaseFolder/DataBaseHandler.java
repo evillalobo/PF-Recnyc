@@ -316,4 +316,5 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 "**3-"+cursor.getString(3));
         return recursoCulturalInfo;
     }
+
 }
