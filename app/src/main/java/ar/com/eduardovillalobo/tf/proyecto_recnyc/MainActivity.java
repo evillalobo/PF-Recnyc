@@ -1,6 +1,7 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc;
 
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,13 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.Departamentos.DepartamentosFragment;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.Search.SearchableActivity;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.NavigationDrawerFolder.NavigationDrawerFragment;
 
 
@@ -84,10 +88,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
+        //SearchableInfo searchableInfo = searchManager.getSearchableInfo(new ComponentName(context, SearchableActivity.class));
+        /*getMenuInflater().inflate(R.menu.menu_main, menu);
         this.menu = menu;
-
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
@@ -101,7 +104,27 @@ public class MainActivity extends ActionBarActivity {
             public boolean onQueryTextChange(String s) {
                 return false;
             }
-        });
+        });*/
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        this.menu = menu;
+
+        SearchManager manager = (SearchManager) getSystemService(context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.buscar).getActionView();
+        searchView.setSearchableInfo(manager.getSearchableInfo(new ComponentName(context, SearchableActivity.class)));
+
+        searchView.setSubmitButtonEnabled(true);
+
+        if (searchView == null)
+        {
+            System.out.println("El SearchView está vacio");
+        }
+        if (searchView != null)
+        {
+            System.out.println("El SearchView NO está vacio");
+            System.out.println("El SearchView Tiene valor "+ searchView.getQuery()+".");
+        }
+
         return true;
     }
 
@@ -114,8 +137,11 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
+        if (id == R.id.buscar) {
+            Toast.makeText(getApplicationContext(), "Buscando = "+onSearchRequested(), Toast.LENGTH_SHORT).show();
+
             onSearchRequested();
+
             return true;
         }
 

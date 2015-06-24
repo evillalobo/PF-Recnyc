@@ -5,20 +5,9 @@
     android:id="@+id/mapas"
     tools:context="ar.com.eduardovillalobo.tf.proyecto_recnyc.Mapas.Mapas">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Mapa"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/imageView2"
-        android:layout_centerHorizontal="true" />
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@drawable/logob"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>
