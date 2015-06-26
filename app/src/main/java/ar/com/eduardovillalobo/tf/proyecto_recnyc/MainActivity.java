@@ -112,18 +112,7 @@ public class MainActivity extends ActionBarActivity {
         SearchManager manager = (SearchManager) getSystemService(context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.buscar).getActionView();
         searchView.setSearchableInfo(manager.getSearchableInfo(new ComponentName(context, SearchableActivity.class)));
-
         searchView.setSubmitButtonEnabled(true);
-
-        if (searchView == null)
-        {
-            System.out.println("El SearchView está vacio");
-        }
-        if (searchView != null)
-        {
-            System.out.println("El SearchView NO está vacio");
-            System.out.println("El SearchView Tiene valor "+ searchView.getQuery()+".");
-        }
 
         return true;
     }

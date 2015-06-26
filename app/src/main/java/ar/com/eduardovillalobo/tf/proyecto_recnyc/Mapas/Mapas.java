@@ -33,6 +33,8 @@ public class Mapas extends ActionBarActivity {
     CameraPosition currentFocus;
     private Toolbar mToolbar;
     private Menu menu;
+    private Float c_lat;
+    private Float c_long;
 
     @Override
     protected void onResume(){
@@ -57,6 +59,9 @@ public class Mapas extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapas);
         //Tratar de poner toolbar en el mapa
+        Bundle b = getIntent().getExtras();
+        c_lat = b.getFloat("lat");
+        c_long = b.getFloat("long");
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -65,7 +70,7 @@ public class Mapas extends ActionBarActivity {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setMyLocationEnabled(true);
 
-        addMarker();
+        addMarker(c_lat, c_long);
         if(savedInstanceState != null){
             Log.d("GoogleMapa", "Entra en el if del Oncreate savedInstanceState");
         }
@@ -148,9 +153,9 @@ public class Mapas extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void addMarker(){
+    private void addMarker(Float cor_lat, Float cor_long){
         Marker marker = googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(-28.457553, -65.758527))
+                .position(new LatLng(cor_lat, cor_long))
                 .title("Capital")
                 .snippet("Paseo Gral Navarro")
         );

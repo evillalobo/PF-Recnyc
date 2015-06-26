@@ -1,5 +1,6 @@
 package ar.com.eduardovillalobo.tf.proyecto_recnyc.RecursosNaturales;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.Contruyendo;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.DataBaseHandler;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.DataBaseFolder.RecursoNaturalInfo;
+import ar.com.eduardovillalobo.tf.proyecto_recnyc.Mapas.Mapas;
 import ar.com.eduardovillalobo.tf.proyecto_recnyc.R;
 
 /**
@@ -36,6 +38,7 @@ public class RecursoNaturalDetalle extends Fragment implements View.OnClickListe
         TextView tv_titulo = (TextView) rootView.findViewById(R.id.title_selected_rec_nat);
         TextView tv_desc = (TextView) rootView.findViewById(R.id.descr_selected_rec_nat);
         ImageView iv_rec = (ImageView) rootView.findViewById(R.id.image_rec_nat_detalle);
+        TextView tv_aspec = (TextView) rootView.findViewById(R.id.aspec_rec_nat);
         recursoNaturalInfo = getRecursoNat(id);
 
         //Sets data
@@ -44,6 +47,7 @@ public class RecursoNaturalDetalle extends Fragment implements View.OnClickListe
         /*int imageResource = getActivity().getResources().getIdentifier(recursoNaturalInfo.getImageID(),
                 null,getActivity().getPackageName());
         Picasso.with(getActivity()).load(imageResource).into(iv_depto);*/
+        tv_aspec.setText("Coordenadas:"+recursoNaturalInfo.getC_lat()+" "+recursoNaturalInfo.getC_long());
 
         Button btn_mapa = (Button) rootView.findViewById(R.id.bt_mapa_rec_nat);
 
@@ -56,10 +60,16 @@ public class RecursoNaturalDetalle extends Fragment implements View.OnClickListe
     public void onClick(View v) {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
+        Intent intent = null;
 
         switch (v.getId()){
             case R.id.bt_mapa_rec_nat:
-                fragment = new Contruyendo();
+                //fragment = new Contruyendo();
+                intent = new Intent(getActivity(), Mapas.class);
+                Bundle b = new Bundle();
+                b.putFloat("lat", Float.parseFloat(recursoNaturalInfo.getC_lat()));
+                b.putFloat("long", Float.parseFloat(recursoNaturalInfo.getC_long()));
+                intent.putExtras(b);
                 break;
         }
         if(fragment != null)
@@ -67,6 +77,10 @@ public class RecursoNaturalDetalle extends Fragment implements View.OnClickListe
             fragmentManager.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .replace(R.id.frame_container, fragment).addToBackStack(null).commit();
+        }
+        if(intent != null)
+        {
+            startActivity(intent);
         }
     }
 

@@ -8,22 +8,28 @@ public class RecursoNaturalInfo {
     private String nombre;
     private String descripcion;
     private String imageID;
+    private String c_lat;
+    private String c_long;
 
     /*Constructores*/
     public RecursoNaturalInfo() {
     }
 
-    public RecursoNaturalInfo(int id, String nombre, String imageID, String descripcion) {
+    public RecursoNaturalInfo(int id, String nombre, String imageID, String descripcion, String c_lat, String c_long) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imageID = imageID;
+        this.c_lat = c_lat;
+        this.c_long = c_long;
     }
 
-    public RecursoNaturalInfo(String nombre, String imageID, String descripcion) {
+    public RecursoNaturalInfo(String nombre, String imageID, String descripcion, String c_lat, String c_long) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imageID = imageID;
+        this.c_lat = c_lat;
+        this.c_long = c_long;
     }
     /*Getters y Setters*/
     public int getId() {
@@ -56,5 +62,21 @@ public class RecursoNaturalInfo {
 
     public void setImageID(String imageID) {
         this.imageID = imageID;
+    }
+
+    public String getC_lat() {
+        return c_lat;
+    }
+
+    public void setC_lat(String c_lat) {
+        this.c_lat = c_lat;
+    }
+
+    public String getC_long() {
+        return c_long;
+    }
+
+    public void setC_long(String c_long) {
+        this.c_long = c_long;
     }
 }

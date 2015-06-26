@@ -32,6 +32,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String KEY_NOMBRE = "nombre";
     private static final String KEY_IMAGEN = "imageID";
     private static final String KEY_DESCRIPCION = "descripcion";
+    private static final String KEY_LAT = "c_lat";
+    private static final String KEY_LONG = "c_long";
     //Parámetros
     private static final String WHERE = null;
     private static final String WHERE_ARGS = null;
@@ -40,6 +42,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String ORDER = null;
 
     private static final String[] COLUMNS = {KEY_ID, KEY_NOMBRE, KEY_IMAGEN, KEY_DESCRIPCION};
+    private static final String[] COLUMNS_COOR = {KEY_ID, KEY_NOMBRE, KEY_IMAGEN, KEY_DESCRIPCION, KEY_LAT, KEY_LONG};
 
     Context mContext=null;
 
@@ -185,7 +188,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public RecursoNaturalInfo getRecursoNatural(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_RECURSOS_NATURALES,//Table
-                COLUMNS,//Columns
+                COLUMNS_COOR,//Columns
                 " id = ?",//Where
                 new String[]{String.valueOf(id)},//WhereArgs
                 null,//groupby
@@ -201,7 +204,9 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         RecursoNaturalInfo recursoNaturalInfo = new RecursoNaturalInfo(
                 cursor.getString(1),
                 cursor.getString(2),
-                cursor.getString(3)
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5)
         );
         Log.d("Recurso Cultural, Info tabla--->","0-"+cursor.getString(0)+
                 "**1-"+cursor.getString(1)+
